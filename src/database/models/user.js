@@ -34,6 +34,7 @@ const attr = {
 module.exports = (sequelize) => {
   const model = sequelize.define('User', attr, {
     tableName:'Users',
+    timestamps: false,
   });
   return model;
 };
