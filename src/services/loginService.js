@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const models = require('../database/models');
 
-const services = {
+const loginServices = {
   makeToken(obj) {
     const data = { data: obj };
     const token = jwt.sign(data, process.env.JWT_SECRET);
@@ -37,4 +37,4 @@ const services = {
   },
 };
 
-module.exports = services;
+module.exports = loginServices;
