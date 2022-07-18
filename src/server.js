@@ -4,6 +4,7 @@ const app = require('./api');
 const errorHandlerMiddleware = require('./middlewares/errorHandlerMiddleware');
 const categoryRouter = require('./routes/categoryRouter');
 const loginRoute = require('./routes/loginRouter');
+const postRouter = require('./routes/postRouter');
 const userRouter = require('./routes/userRouter');
 
 // não remova a variável `API_PORT` ou o `listen`
@@ -19,6 +20,8 @@ app.use('/login', loginRoute);
 app.use('/user', userRouter);
 
 app.use('/categories', categoryRouter);
+
+app.use('/post', postRouter);
 
 app.use(errorHandlerMiddleware);
 
