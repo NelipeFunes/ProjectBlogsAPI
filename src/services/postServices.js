@@ -10,6 +10,23 @@ const postServices = {
     });
     return posts;
   },
+
+  async getById(id) {
+    const post = await models.BlogPost.findOne({
+      where: { id },
+      include: [
+        { model: models.User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: models.Category, as: 'categories' },
+
+      ],
+    });
+    if (!post) {
+      const error = new Error('Post does not exist');
+      error.status = 404;
+      throw error;
+    }
+    return post;
+  },
 };
 
 module.exports = postServices;
