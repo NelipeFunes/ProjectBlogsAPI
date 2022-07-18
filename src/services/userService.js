@@ -32,6 +32,11 @@ const userServices = {
     await models.User.create({ displayName, email, password, image }, { raw: true });
     return { displayName, email, password, image };
   },
+
+  async getAll() {
+    const users = await models.User.findAll({ attributes: { exclude: ['password'] } });
+    return users;
+  },
 };
 
 module.exports = userServices;

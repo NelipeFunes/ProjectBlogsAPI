@@ -1,14 +1,9 @@
 const Joi = require('joi');
-const jwt = require('jsonwebtoken');
 
 const models = require('../database/models');
 
 const loginServices = {
-  makeToken(obj) {
-    const data = { data: obj };
-    const token = jwt.sign(data, process.env.JWT_SECRET);
-    return token;
-  },
+  
   async validateLogin(obj) {
     const schema = Joi.object({
       email: Joi.string().required().email(),
