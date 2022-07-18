@@ -4,6 +4,8 @@ const tokenMiddleware = require('../middlewares/tokenMiddleware');
 
 const categoryRouter = Router();
 
-categoryRouter.route('/').post(tokenMiddleware, categoryController.registerCategory);
+categoryRouter.route('/')
+  .post(tokenMiddleware, categoryController.registerCategory)
+  .get(tokenMiddleware, categoryController.getAll);
 
 module.exports = categoryRouter;

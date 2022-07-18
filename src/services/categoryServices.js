@@ -20,6 +20,11 @@ const categoryServices = {
     const category = models.Category.findOne({ where: { name } });
     return category;
   },
+
+  async getAll() {
+    const categories = await models.Category.findAll();
+    return categories;
+  },
 };
 
 module.exports = categoryServices;
