@@ -11,9 +11,16 @@ const userController = {
   },
 
   /** @type {import('express').RequestHandler} */
-  async getAll(req, res) {
+  async getAll(_req, res) {
     const users = await userServices.getAll();
     res.status(200).json(users);
+  },
+
+ /** @type {import('express').RequestHandler} */
+  async getById(req, res) {
+    const { id } = req.params;
+    const user = await userServices.getById(id);
+    return res.status(200).json(user);
   },
 };
 
