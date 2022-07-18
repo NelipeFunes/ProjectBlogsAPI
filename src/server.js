@@ -2,6 +2,7 @@ require('dotenv').config();
 require('express-async-errors');
 const app = require('./api');
 const errorHandlerMiddleware = require('./middlewares/errorHandlerMiddleware');
+const categoryRouter = require('./routes/categoryRouter');
 const loginRoute = require('./routes/loginRouter');
 const userRouter = require('./routes/userRouter');
 
@@ -16,6 +17,8 @@ app.get('/', (_request, response) => {
 app.use('/login', loginRoute);
 
 app.use('/user', userRouter);
+
+app.use('/categories', categoryRouter);
 
 app.use(errorHandlerMiddleware);
 

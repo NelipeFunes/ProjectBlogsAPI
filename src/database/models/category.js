@@ -22,7 +22,7 @@ const attributes = {
 
 module.exports = (sequelize) => {
   const model = sequelize.define('Category', attributes, {
-    tableName: 'Category',
+    tableName: 'Categories',
     timestamps: false
   });
   return model;
