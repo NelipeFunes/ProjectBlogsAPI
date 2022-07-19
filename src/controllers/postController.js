@@ -16,11 +16,27 @@ const postController = {
 
     /** @type {import('express').RequestHandler} */
   async updatePost(req, res) {
-    const { id } = req.user;
-    const { id: userId } = req.params;
+    const { id: userId } = req.user;
+    const { id } = req.params;
     const validate = await postServices.validateBody(req.body);
     const updated = await postServices.updatePost({ ...validate, id, userId });
     return res.status(200).json(updated);
+  },
+
+  /** @type {import('express').RequestHandler} */
+  async deletePost(req, res) {
+    const { id: userId } = req.user;
+    const { id } = req.params;
+    await postServices.deletePost(id, userId);
+    return res.status(204).end();
+  },
+
+  async registerPost(req, res) {
+    const { id } = req.user;
+    const validate = await postServices.validateBodyWithCategories(req.body);
+    await postServices.validateCategory(req.body.categoryIds);
+    const register = await postServices.registerPost({ ...validate, id });
+    return res.status(201).json(register);
   },
 
 };

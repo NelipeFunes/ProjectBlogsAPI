@@ -7,7 +7,7 @@ const errorHandlerMiddleware = (err, _req, res, _next) => {
     return res.status(401).json({ message: 'Expired or invalid token' });
   }
 
-  return res.status(500).json({ message: err.message });
+  return res.status(500).json({ message: err.message, name: err.name });
 };
 
 module.exports = errorHandlerMiddleware;
