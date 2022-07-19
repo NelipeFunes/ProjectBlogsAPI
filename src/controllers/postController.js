@@ -40,11 +40,11 @@ const postController = {
   },
 
   /** @type {import('express').RequestHandler} */
-  async query(req, res) {
+  async queryPost(req, res) {
     const { q } = req.query;
-    const postsId = await postServices.query(q);
-    const posts = await Promise.all(postsId.map((id) => postServices.getById(id)));
-    return res.status(200).json(posts);
+    const posts = await postServices.queryPost(q);
+    const postsId = await Promise.all(posts.map(async (id) => postServices.getById(id)));
+    return res.status(200).json(postsId);
   },
 
 };

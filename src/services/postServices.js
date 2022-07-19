@@ -121,17 +121,18 @@ const postServices = {
     return { id: post.id, userId: id, title, content, published, updated };
   },
 
-  async query(q) {
+  async queryPost(query) {
     const posts = await models.BlogPost.findAll({
       where: {
         [Op.or]: [
           {
-            title: { [Op.like]: `%${q}%` },
+            title: { [Op.like]: `%${query}%` },
           },
           { 
-            content: { [Op.like]: `%${q}%` },
+            content: { [Op.like]: `%${query}%` },
           }],
         },
+        raw: true,
     });
     const postIds = posts.map(({ id }) => id);
     return postIds;
