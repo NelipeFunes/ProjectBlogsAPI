@@ -20,6 +20,11 @@ const tokenUtils = {
     const { data } = jwt.verify(token, secret);
     return data;
   },
+
+  async decodeToken(token) {
+    const { data } = jwt.decode(token, secret);
+    return data;
+  },
 };
 
 module.exports = tokenUtils;
