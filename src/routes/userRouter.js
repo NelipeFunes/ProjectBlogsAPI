@@ -11,4 +11,7 @@ userRouter.route('/')
 userRouter.route('/:id')
   .get(tokenMiddleware, userController.getById);
 
+userRouter.route('/me')
+  .delete(tokenMiddleware, userController.deleteUser);
+
 module.exports = userRouter;

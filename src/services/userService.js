@@ -51,6 +51,16 @@ const userServices = {
     }
     return user;
   },
+
+  async deleteUser(id) {
+    const posts = await models.BlogPost.findAll({ where: { userId: id } });
+    const delets = await Promise.all(posts.map(({ id: postId }) => models.PostCategory.destroy({
+      where: { postId },
+    })));
+    await models.BlogPost.destroy({ where: { userId: id } });
+    await models.User.destroy({ where: { id } });
+    return delets;
+  },
 };
 
 module.exports = userServices;
