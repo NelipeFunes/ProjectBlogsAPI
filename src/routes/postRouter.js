@@ -13,4 +13,6 @@ postRouter.route('/:id')
   .delete(tokenMiddleware, postController.deletePost)
   .put(tokenMiddleware, postController.updatePost);
 
+postRouter.route('/search').get(tokenMiddleware, postController.query);
+
 module.exports = postRouter;

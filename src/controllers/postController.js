@@ -39,6 +39,14 @@ const postController = {
     return res.status(201).json(register);
   },
 
+  /** @type {import('express').RequestHandler} */
+  async query(req, res) {
+    const { q } = req.query;
+    const postsId = await postServices.query(q);
+    // const posts = await Promise.all(postsId.map((id) => postServices.getById(id)));
+    return res.status(200).json(postsId);
+  },
+
 };
 
 module.exports = postController;

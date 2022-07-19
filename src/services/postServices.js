@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { Op } = require('sequelize');
 const models = require('../database/models');
 
 const postServices = {
@@ -118,6 +119,22 @@ const postServices = {
     published = post.published;
     updated = post.updated;
     return { id: post.id, userId: id, title, content, published, updated };
+  },
+
+  async query(q) {
+    const posts = await models.BlogPost.findAll({
+      where: {
+        [Op.or]: [
+          {
+            title: { [Op.like]: `%${q}%` },
+          },
+          { 
+            content: { [Op.like]: `%${q}%` },
+          }],
+        },
+    });
+    const postIds = posts.map(({ id }) => id);
+    return postIds;
   },
 };
 
